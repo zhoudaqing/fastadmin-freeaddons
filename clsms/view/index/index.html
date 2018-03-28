@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+        <title>创蓝短信发送示例</title>
+        <link href="http://qd.andiff.net/btp337/dist/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="/assets/css/frontend.min.css" rel="stylesheet"/>
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script type="text/javascript" src="http://qd.andiff.net/script/html5shiv.min.js"></script>
+          <script type="text/javascript" src="http://qd.andiff.net/btp337/js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="container">
+            <div class="well" style="margin-top:30px;">
+                <fieldset>
+                    <legend>创蓝短信发送</legend>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">手机号</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="mobile" name="mobile" placeholder="手机号">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">短信内容</label>
+                        <div class="col-lg-10">
+                            <textarea id="msg" name="msg" class="form-control" cols="30" rows="10" placeholder="短信内容"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button type="button" id="btnsend" name="btnsend" class="btn btn-primary">发送</button>
+                            <button type="reset" class="btn btn-default">重置</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <script type="text/javascript" src="http://qd.andiff.net/script/jquery2.js"></script>
+        <script type="text/javascript" src="http://qd.andiff.net/btp337/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            $("#btnsend").click(function () {
+                $.ajax({
+                    type: "post",
+                    url: "{:addon_url('clsms/index/send')}",
+                    data: {mobile: $("#mobile").val(), msg: $("#msg").val(), r: Math.random()},
+                    success: function (data) {
+                        alert('发送成功');
+                    },
+                    error: function () {
+                        alert('发送失败');
+                    },
+                    complete: function () {
+
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
